@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 // INTRO TO PROC GEN LAB
@@ -17,16 +18,31 @@ public class Pathmaker : MonoBehaviour
 
     //	DECLARE CLASS MEMBER VARIABLES:
     //	Declare a private integer called counter that starts at 0; 		// counter will track how many floor tiles I've instantiated
+    private int counter = 0;
     //	Declare a public Transform called floorPrefab, assign the prefab in inspector;
+    public Transform floorPrefab;
     //	Declare a public Transform called pathmakerSpherePrefab, assign the prefab in inspector; 		// you'll have to make a "pathmakerSphere" prefab later
-
+    public Transform pathmakerSphererPrefab;
+    public float RandomNumberHolder;
 
     void Update()
     {
         //		If counter is less than 50, then:
+        if(counter < 50)
         //			Generate a random number from 0.0f to 1.0f;
+        {
+            RandomNumberHolder = Random.Range(0.0f, 1.0f);            
+        }
         //			If random number is less than 0.25f, then rotate myself 90 degrees;
+        if(RandomNumberHolder < 0.25f)
+        {
+            pathmakerSphererPrefab.rotation = new Quaternion(0,0,1,1);
+        }
         //				... Else if number is 0.25f-0.5f, then rotate myself -90 degrees;
+        else if(0.25f < RandomNumberHolder && RandomNumberHolder < 0.5f)
+        {
+            pathmakerSphererPrefab.rotation = new Quaternion(0,0,-1,1);
+        }
         //				... Else if number is 0.99f-1.0f, then instantiate a pathmakerSpherePrefab clone at my current position;
         //			// end elseIf
 
